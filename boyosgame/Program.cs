@@ -2,7 +2,7 @@
 using System.Numerics;
 
 
-Raylib.InitWindow(800, 600, "game");
+Raylib.InitWindow(1280, 800, "game");
 Raylib.SetTargetFPS(60);
 
 Vector2 movement = new Vector2(0.1f, 0.1f);
@@ -10,7 +10,7 @@ Vector2 movement = new Vector2(0.1f, 0.1f);
 float speed = 5;
 
 
-Rectangle playerRect = new Rectangle(400, 300, 32, 32);
+Rectangle playerRect = new Rectangle(400, 300, 60, 100);
 
 while (!Raylib.WindowShouldClose())
 {
@@ -49,6 +49,8 @@ while (!Raylib.WindowShouldClose())
 
     playerRect.X += movement.X;
     playerRect.Y += movement.Y;
+
+
 
 
 
