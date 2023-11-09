@@ -1,0 +1,4 @@
+c:\Users\yousuf.assal\Documents\spelutväckling\towerofhell\boyosgame\obj\Debug\net7.0\boyosgame.GeneratedMSBuildEditorConfig.editorconfig
+c:\Users\yousuf.assal\Documents\spelutväckling\towerofhell\boyosgame\obj\Debug\net7.0\boyosgame.AssemblyInfoInputs.cache
+c:\Users\yousuf.assal\Documents\spelutväckling\towerofhell\boyosgame\obj\Debug\net7.0\boyosgame.AssemblyInfo.cs
+c:\Users\yousuf.assal\Documents\spelutväckling\towerofhell\boyosgame\obj\Debug\net7.0\boyosgame.csproj.CoreCompileInputs.cache
