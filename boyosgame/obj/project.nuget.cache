@@ -1,8 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "Je1Hz8rAKIpiRAu1czyPVibAq8G+pf0DY76p51awZfFvhvoS3xMX1XSCEyjbTX0m5ZMB2FtuS8EfnBTA9LhIWQ==",
+  "dgSpecHash": "VifqDS4v+H6LUGRmvVjkHfqz/zeU6C2PxTQ/mRZQagP4Fs1mePZiy6Ll3gd2QB+hgnbvGgat67VoRZP/UgTfyQ==",
   "success": true,
   "projectFilePath": "c:\\Users\\yousuf.assal\\Documents\\spelutväckling\\towerofhell\\boyosgame\\boyosgame.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\yousuf.assal\\.nuget\\packages\\raylib-cs\\5.0.0\\raylib-cs.5.0.0.nupkg.sha512",
+    "C:\\Users\\yousuf.assal\\.nuget\\packages\\system.numerics.vectors\\4.5.0\\system.numerics.vectors.4.5.0.nupkg.sha512"
+  ],
   "logs": []
 }
