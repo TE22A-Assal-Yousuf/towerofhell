@@ -1,4 +1,4 @@
-﻿using Raylib_cs;
+﻿﻿using Raylib_cs;
 using System.Numerics;
 using System.Runtime.InteropServices;
 
@@ -12,7 +12,13 @@ float speed = 5;
 
 string scene = "start";
 
-Rectangle playerRect = new Rectangle(400, 300, 60, 100);
+int playerpositionx = 20;
+int playerpositiony = 30;
+
+Texture2D swordtexture = Raylib.LoadTexture("pixil-frame-0.png");
+Rectangle playerRect = new Rectangle(playerpositionx, playerpositiony, 64, 64);
+Rectangle swordRect = new Rectangle(playerpositionx + 38 , playerpositiony - 62, 20, 64);
+
 
 
 
@@ -33,10 +39,12 @@ while (!Raylib.WindowShouldClose())
     }
     else if (scene == "game")
     {
-        int characterPositionx = 400;
-        int characterPositiony = 300;
-
+       
+        Raylib.DrawRectangleRec(swordRect, Color.GRAY);
         Raylib.DrawRectangleRec(playerRect, Color.RED);
+
+        Raylib.DrawTextureEx(swordtexture, swordRect, 45, 1, Color.BLUE);
+        
 
         movement = Vector2.Zero;
 
@@ -64,6 +72,8 @@ while (!Raylib.WindowShouldClose())
 
         playerRect.X += movement.X;
         playerRect.Y += movement.Y;
+        swordRect.X += movement.X;
+        swordRect.Y += movement.Y;
     }
     
     //--------------------------------------------------------------------------------------------------------------------------------------------------------------
