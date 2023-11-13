@@ -3,6 +3,7 @@ using System.Numerics;
 using System.Runtime.InteropServices;
 
 
+
 Raylib.InitWindow(1280, 800, "game");
 Raylib.SetTargetFPS(60);
 
@@ -10,15 +11,14 @@ Vector2 movement = new Vector2(0.1f, 0.1f);
 
 float speed = 5;
 
-string scene = "start";
+string scene = "game";
 
-int playerpositionx = 20;
-int playerpositiony = 30;
+int playerpositionx = 1280 / 2 - 64;
+int playerpositiony = 400 - 64;
 
 Texture2D swordtexture = Raylib.LoadTexture("pixil-frame-0.png");
 Rectangle playerRect = new Rectangle(playerpositionx, playerpositiony, 64, 64);
 Rectangle swordRect = new Rectangle(playerpositionx + 38 , playerpositiony - 62, 20, 64);
-
 
 
 
@@ -39,12 +39,16 @@ while (!Raylib.WindowShouldClose())
     }
     else if (scene == "game")
     {
-       
-        Raylib.DrawRectangleRec(swordRect, Color.GRAY);
         Raylib.DrawRectangleRec(playerRect, Color.RED);
 
-        Raylib.DrawTextureEx(swordtexture, swordRect, 45, 1, Color.BLUE);
-        
+        //Raylib.DrawTextureEx(swordtexture, , 45, 1, Color.BLUE);
+        /*
+        [Better map layout and stuff]
+
+        make the map a grid that everything is placed on 
+        ↓
+
+        */
 
         movement = Vector2.Zero;
 
@@ -74,6 +78,15 @@ while (!Raylib.WindowShouldClose())
         playerRect.Y += movement.Y;
         swordRect.X += movement.X;
         swordRect.Y += movement.Y;
+
+        /*
+        [Make character movement better?]
+
+        if hit button once change direction 
+        ↓
+        else if button is held walk one tile att a time 
+
+        */
     }
     
     //--------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -88,8 +101,24 @@ while (!Raylib.WindowShouldClose())
     }
     else if(scene == "game"){
         Raylib.ClearBackground(Color.MAROON);
+
+        Raylib.DrawRectangleRec(swordRect, Color.GRAY);
+        Raylib.DrawTexture(swordtexture, (int)swordRect.X, (int)swordRect.Y, Color.WHITE);
+
     }
 
+    /*
+    [SWORD ANIMATION AND HITBOX]
+
+    if mouse button gets clicked 
+    ↓
+    make the hitbox of the sword bigger / as big as the sword animation/look
+    ↓
+    play an animation that shows the sword swinging relly fast but in reality the hit box is just expaning 
+
+
+
+    */
    
 
 
