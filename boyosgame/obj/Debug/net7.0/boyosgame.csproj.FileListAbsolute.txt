@@ -20,3 +20,4 @@ c:\Users\yousuf.assal\Documents\spelutväckling\towerofhell\boyosgame\obj\Debug\
 c:\Users\yousuf.assal\Documents\spelutväckling\towerofhell\boyosgame\obj\Debug\net7.0\boyosgame.pdb
 c:\Users\yousuf.assal\Documents\spelutväckling\towerofhell\boyosgame\obj\Debug\net7.0\boyosgame.genruntimeconfig.cache
 c:\Users\yousuf.assal\Documents\spelutväckling\towerofhell\boyosgame\obj\Debug\net7.0\ref\boyosgame.dll
+c:\Users\yousuf.assal\Documents\spelutväckling\towerofhell\boyosgame\bin\Debug\net7.0\swordtexture.png

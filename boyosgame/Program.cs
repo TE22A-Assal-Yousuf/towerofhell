@@ -16,9 +16,12 @@ string scene = "game";
 int playerpositionx = 1280 / 2 - 64;
 int playerpositiony = 400 - 64;
 
-Texture2D swordtexture = Raylib.LoadTexture("pixil-frame-0.png");
+int swordposx = playerpositionx + 38;
+int swordposy = playerpositiony - 62;
+
+Texture2D swordTexture = Raylib.LoadTexture(@"swordtexture.png");
 Rectangle playerRect = new Rectangle(playerpositionx, playerpositiony, 64, 64);
-Rectangle swordRect = new Rectangle(playerpositionx + 38 , playerpositiony - 62, 20, 64);
+Rectangle swordRect = new Rectangle(swordposx , swordposy, 20, 64);
 
 
 
@@ -100,10 +103,11 @@ while (!Raylib.WindowShouldClose())
 
     }
     else if(scene == "game"){
-        Raylib.ClearBackground(Color.MAROON);
+        Raylib.ClearBackground(Color.BLACK);
 
         Raylib.DrawRectangleRec(swordRect, Color.GRAY);
-        Raylib.DrawTexture(swordtexture, (int)swordRect.X, (int)swordRect.Y, Color.WHITE);
+        Raylib.DrawTexture(swordTexture, swordposx, swordposy, Color.WHITE);
+        
 
     }
 
