@@ -9,6 +9,10 @@ Raylib.SetTargetFPS(60);
 
 Vector2 movement = new Vector2(0.1f, 0.1f);
 
+//--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+// Variables
+//--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 float speed = 5;
 
 string scene = "game";
@@ -19,9 +23,18 @@ int playerpositiony = 400 - 64;
 int swordposx = playerpositionx + 38;
 int swordposy = playerpositiony - 62;
 
+int swordWidth = 20;
+int swordHeight = 64;
+
+
+//--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+// Stuff
+//--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
 Texture2D swordTexture = Raylib.LoadTexture(@"swordtexture.png");
 Rectangle playerRect = new Rectangle(playerpositionx, playerpositiony, 64, 64);
-Rectangle swordRect = new Rectangle(swordposx , swordposy, 20, 64);
+Rectangle swordRect = new Rectangle(swordposx , swordposy, swordWidth, swordHeight);
 
 
 
@@ -35,7 +48,7 @@ while (!Raylib.WindowShouldClose())
 
     if (scene == "start")
     {
-        if (Raylib.IsKeyDown(KeyboardKey.KEY_SPACE))
+        if (Raylib.IsKeyPressed(KeyboardKey.KEY_SPACE))
         {
             scene = "game";
         }
@@ -52,6 +65,23 @@ while (!Raylib.WindowShouldClose())
         ↓
 
         */
+
+        Raylib.GetMousePosition();
+
+         if (Raylib.IsKeyPressed(KeyboardKey.KEY_ESCAPE))
+        {
+            scene = "pause";
+        }
+
+        
+    
+
+        if (Raylib.IsKeyPressed(KeyboardKey.KEY_F)) {
+
+            swordWidth = 40;
+            swordHeight = swordHeight * 2;
+
+        }
 
         movement = Vector2.Zero;
 
@@ -91,6 +121,9 @@ while (!Raylib.WindowShouldClose())
 
         */
     }
+    else if (scene == "pause"){
+
+    }
     
     //--------------------------------------------------------------------------------------------------------------------------------------------------------------
     //OMG THAT LOOKS NICE
@@ -109,6 +142,9 @@ while (!Raylib.WindowShouldClose())
         Raylib.DrawTexture(swordTexture, swordposx, swordposy, Color.WHITE);
         
 
+    }
+    else if (scene == "pause"){
+        
     }
 
     /*
