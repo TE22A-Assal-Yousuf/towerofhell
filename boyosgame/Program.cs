@@ -17,7 +17,7 @@ Vector2 movement = new Vector2(0.1f, 0.1f);
 
 float speed = 5;
 
-string scene = "game";
+string scene = "start";
 
 int playerPositionX = windowWidth / 2 - 64;
 int playerPositionY = windowHeight / 2 - 64;
@@ -152,6 +152,8 @@ while (!Raylib.WindowShouldClose())
     }
     else if (scene == "pause"){
         Raylib.ClearBackground(Color.BLACK);
+        Raylib.DrawText("Paused", 320, 100, 100, Color.GRAY);
+
     }
 
     /*
