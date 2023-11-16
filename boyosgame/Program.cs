@@ -2,10 +2,12 @@
 using System.Numerics;
 using System.Runtime.InteropServices;
 
+int windowWidth = 1280;
+int windowHeight = 800;
+int fps = 60;
 
-
-Raylib.InitWindow(1280, 800, "game");
-Raylib.SetTargetFPS(60);
+Raylib.InitWindow(windowWidth, windowHeight, "Battletower");
+Raylib.SetTargetFPS(fps);
 
 Vector2 movement = new Vector2(0.1f, 0.1f);
 
@@ -17,11 +19,11 @@ float speed = 5;
 
 string scene = "game";
 
-int playerpositionx = 1280 / 2 - 64;
-int playerpositiony = 400 - 64;
+int playerPositionX = windowWidth / 2 - 64;
+int playerPositionY = windowHeight / 2 - 64;
 
-int swordposx = playerpositionx + 38;
-int swordposy = playerpositiony - 62;
+int swordPosX = playerPositionX + 38;
+int swordPosY = playerPositionY - 62;
 
 int swordWidth = 20;
 int swordHeight = 64;
@@ -31,10 +33,10 @@ int swordHeight = 64;
 // Stuff
 //--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-
+Texture2D background = Raylib.LoadTexture(@"");
 Texture2D swordTexture = Raylib.LoadTexture(@"swordtexture.png");
-Rectangle playerRect = new Rectangle(playerpositionx, playerpositiony, 64, 64);
-Rectangle swordRect = new Rectangle(swordposx , swordposy, swordWidth, swordHeight);
+Rectangle playerRect = new Rectangle(playerPositionX, playerPositionY, 64, 64);
+Rectangle swordRect = new Rectangle(swordPosX , swordPosY, swordWidth, swordHeight);
 
 
 
@@ -44,6 +46,7 @@ Rectangle swordRect = new Rectangle(swordposx , swordposy, swordWidth, swordHeig
 
 while (!Raylib.WindowShouldClose())
 {
+
     Raylib.BeginDrawing();
 
     if (scene == "start")
@@ -68,7 +71,7 @@ while (!Raylib.WindowShouldClose())
 
         Raylib.GetMousePosition();
 
-         if (Raylib.IsKeyPressed(KeyboardKey.KEY_ESCAPE))
+         if (Raylib.IsKeyPressed(KeyboardKey.KEY_SPACE))
         {
             scene = "pause";
         }
@@ -122,7 +125,11 @@ while (!Raylib.WindowShouldClose())
         */
     }
     else if (scene == "pause"){
+        if(Raylib.IsKeyPressed(KeyboardKey.KEY_SPACE)){
 
+            scene = "game";
+
+        }
     }
     
     //--------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -136,15 +143,15 @@ while (!Raylib.WindowShouldClose())
 
     }
     else if(scene == "game"){
-        Raylib.ClearBackground(Color.BLACK);
+        Raylib.ClearBackground(Color.MAROON);
 
         Raylib.DrawRectangleRec(swordRect, Color.GRAY);
-        Raylib.DrawTexture(swordTexture, swordposx, swordposy, Color.WHITE);
+        Raylib.DrawTexture(swordTexture, swordPosX, swordPosY, Color.WHITE);
         
 
     }
     else if (scene == "pause"){
-        
+        Raylib.ClearBackground(Color.BLACK);
     }
 
     /*
