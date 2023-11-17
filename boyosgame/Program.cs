@@ -9,11 +9,11 @@ int fps = 60;
 Raylib.InitWindow(windowWidth, windowHeight, "Battletower");
 Raylib.SetTargetFPS(fps);
 
-Vector2 movement = new Vector2(0.1f, 0.1f);
-
 //--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 // Variables
 //--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Vector2 movement = new Vector2(0.1f, 0.1f);
 
 float speed = 5;
 
@@ -28,17 +28,14 @@ int swordPosY = playerPositionY - 62;
 int swordWidth = 20;
 int swordHeight = 64;
 
-
 //--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 // Stuff
 //--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-Texture2D background = Raylib.LoadTexture(@"");
+//Texture2D background = Raylib.LoadTexture(@"");
 Texture2D swordTexture = Raylib.LoadTexture(@"swordtexture.png");
 Rectangle playerRect = new Rectangle(playerPositionX, playerPositionY, 64, 64);
 Rectangle swordRect = new Rectangle(swordPosX , swordPosY, swordWidth, swordHeight);
-
-
 
 //--------------------------------------------------------------------------------------------------------------------------------------------------------------
 //Game be like
@@ -145,14 +142,32 @@ while (!Raylib.WindowShouldClose())
     else if(scene == "game"){
         Raylib.ClearBackground(Color.MAROON);
 
-        Raylib.DrawRectangleRec(swordRect, Color.GRAY);
+        Raylib.DrawRectangleRec(swordRect, Color.BLANK);
         Raylib.DrawTexture(swordTexture, swordPosX, swordPosY, Color.WHITE);
+        
+        while (scene == "game"){
+
+        Raylib.DrawText("-Press space to pause!", 1025, 760, 20, Color.WHITE);
+        
+
+        }
         
 
     }
     else if (scene == "pause"){
+//Draw lineup
+       
+        //Raylib.DrawLine( 640, 0, 640, 800, Color.RED);
+        //Raylib.DrawLine( 436, 0, 436, 800, Color.RED);
+        //Raylib.DrawLine( 844, 0, 844, 800, Color.RED);
+
+//actual
+
         Raylib.ClearBackground(Color.BLACK);
-        Raylib.DrawText("Paused", 320, 100, 100, Color.GRAY);
+        Raylib.DrawText("PAUSED", 434, 0, 100, Color.GRAY);
+        Raylib.DrawText("Press space to resume!", 390, 700, 40, Color.WHITE);
+
+
 
     }
 
