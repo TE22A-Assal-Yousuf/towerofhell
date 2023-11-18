@@ -22,11 +22,46 @@ string scene = "start";
 int playerPositionX = windowWidth / 2 - 64;
 int playerPositionY = windowHeight / 2 - 64;
 
+int enemySpawnX = 100;
+int enemySpawnY = 100;
+
 int swordPosX = playerPositionX + 38;
 int swordPosY = playerPositionY - 62;
 
 int swordWidth = 20;
 int swordHeight = 64;
+
+//Stats --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+/* NOTES!!!!!!!!
+
+int streangth
+- increase attach damage and raise the number probability
+- if streangth is high it = higher chance of miss but not to high
+- 
+
+int defence
+- reduce damage lol
+- slower attack speed
+- idk
+
+int attackspeed
+-
+-
+-
+
+int evasion
+- how often you could dodge attacks / negate damage "gwen is imune =D" % wise
+- not to high but if you only build it it becomes verry funny becaus no hit possible
+- funny haha make one boss that has extra high evasion so its impossible
+- but ur def stat will be absolutely tanked so that if you do get hit you will be fucked
+
+int accuracy
+- with 100% accuracy comes great reduction to damage so you dont get some bs hits
+-
+
+
+*/
 
 //--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 // Stuff
@@ -36,6 +71,9 @@ int swordHeight = 64;
 Texture2D swordTexture = Raylib.LoadTexture(@"swordtexture.png");
 Rectangle playerRect = new Rectangle(playerPositionX, playerPositionY, 64, 64);
 Rectangle swordRect = new Rectangle(swordPosX , swordPosY, swordWidth, swordHeight);
+Rectangle enemyRect = new Rectangle(enemySpawnX, enemySpawnY, 64, 64);
+
+
 
 swordRect.Width = swordTexture.Width;
 swordRect.Height = swordTexture.Height;
@@ -78,7 +116,47 @@ while (!Raylib.WindowShouldClose())
             scene = "pause";
         }
 
+        //button
+        /*
+
+        - check where mouse is
+        - if mouse is over the buttons pos
+        - then if mouse is clicked over this pos 
+        - the button exe whatever ist supposed to 
         
+        */
+
+        //fighting
+
+        
+
+        /*
+
+        - write simillar code to the fighting game
+        - add some cool shit / more options 
+        - idk but add more
+        
+        */
+
+        //enemy
+
+        /*
+
+        - make if toutch 
+        - popup window when i collide with enemy
+        - ask if i want to fight
+        - sometimes ask but force me no matter what 
+        
+        */
+
+        //collision
+
+        /*
+
+        - check if i have collided 
+        - if true execute whatever i need
+        
+        */
     
 
         //walk
@@ -117,8 +195,6 @@ while (!Raylib.WindowShouldClose())
         {
         movement = Vector2.Normalize(movement) * speed;
         }
-
-
 
         playerRect.X += movement.X;
         playerRect.Y += movement.Y;
@@ -171,12 +247,13 @@ while (!Raylib.WindowShouldClose())
 //actual
 
         Raylib.ClearBackground(Color.BLACK);
-        Raylib.DrawText("PAUSED", 434, 0, 100, Color.GRAY);
+        Raylib.DrawText("PAUSED", 434, 0, 100, Color.BLANK);
         Raylib.DrawText("Press space to resume!", 390, 700, 40, Color.WHITE);
 
 
 
     }
+
 
     /*
     [SWORD ANIMATION AND HITBOX]
