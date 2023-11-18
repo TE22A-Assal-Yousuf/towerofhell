@@ -37,6 +37,9 @@ Texture2D swordTexture = Raylib.LoadTexture(@"swordtexture.png");
 Rectangle playerRect = new Rectangle(playerPositionX, playerPositionY, 64, 64);
 Rectangle swordRect = new Rectangle(swordPosX , swordPosY, swordWidth, swordHeight);
 
+swordRect.Width = swordTexture.Width;
+swordRect.Height = swordTexture.Height;
+
 //--------------------------------------------------------------------------------------------------------------------------------------------------------------
 //Game be like
 //--------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -66,6 +69,8 @@ while (!Raylib.WindowShouldClose())
 
         */
 
+        //pause
+
         Raylib.GetMousePosition();
 
          if (Raylib.IsKeyPressed(KeyboardKey.KEY_SPACE))
@@ -76,18 +81,14 @@ while (!Raylib.WindowShouldClose())
         
     
 
-        if (Raylib.IsKeyPressed(KeyboardKey.KEY_F)) {
-
-            swordWidth = 40;
-            swordHeight = swordHeight * 2;
-
-        }
+        //walk
 
         movement = Vector2.Zero;
 
         if (Raylib.IsKeyDown(KeyboardKey.KEY_LEFT) || Raylib.IsKeyDown(KeyboardKey.KEY_A))
         {
         movement.X = -1;
+        
         }
         else if (Raylib.IsKeyDown(KeyboardKey.KEY_RIGHT) || Raylib.IsKeyDown(KeyboardKey.KEY_D))
         {
@@ -102,24 +103,30 @@ while (!Raylib.WindowShouldClose())
         movement.Y = 1;
         }
 
+        //run
+
+        if(Raylib.IsKeyDown(KeyboardKey.KEY_LEFT_SHIFT) == true){
+            speed = 10;
+            
+        }
+        else if (Raylib.IsKeyReleased(KeyboardKey.KEY_LEFT_SHIFT)){
+            speed = 5;
+        }
+
         if (movement.Length() > 0)
         {
         movement = Vector2.Normalize(movement) * speed;
         }
+
+
 
         playerRect.X += movement.X;
         playerRect.Y += movement.Y;
         swordRect.X += movement.X;
         swordRect.Y += movement.Y;
 
-        /*
-        [Make character movement better?]
+        
 
-        if hit button once change direction 
-        ↓
-        else if button is held walk one tile att a time 
-
-        */
     }
     else if (scene == "pause"){
         if(Raylib.IsKeyPressed(KeyboardKey.KEY_SPACE)){
@@ -142,24 +149,24 @@ while (!Raylib.WindowShouldClose())
     else if(scene == "game"){
         Raylib.ClearBackground(Color.MAROON);
 
-        Raylib.DrawRectangleRec(swordRect, Color.BLANK);
-        Raylib.DrawTexture(swordTexture, swordPosX, swordPosY, Color.WHITE);
+        Raylib.DrawRectangleRec(swordRect, Color.GRAY);
+        Raylib.DrawTexture(swordTexture, (int) swordRect.X, (int) swordRect.Y, Color.WHITE);
         
-        while (scene == "game"){
+     
 
         Raylib.DrawText("-Press space to pause!", 1025, 760, 20, Color.WHITE);
         
 
-        }
+        
         
 
     }
     else if (scene == "pause"){
 //Draw lineup
        
-        //Raylib.DrawLine( 640, 0, 640, 800, Color.RED);
-        //Raylib.DrawLine( 436, 0, 436, 800, Color.RED);
-        //Raylib.DrawLine( 844, 0, 844, 800, Color.RED);
+        Raylib.DrawLine( 640, 0, 640, 800, Color.RED);
+        Raylib.DrawLine( 436, 0, 436, 800, Color.RED);
+        Raylib.DrawLine( 844, 0, 844, 800, Color.RED);
 
 //actual
 
