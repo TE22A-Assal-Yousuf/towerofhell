@@ -67,12 +67,19 @@ int accuracy
 // Stuff
 //--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-//Texture2D background = Raylib.LoadTexture(@"");
 Texture2D swordTexture = Raylib.LoadTexture(@"swordtexture.png");
 Rectangle playerRect = new Rectangle(playerPositionX, playerPositionY, 64, 64);
 Rectangle swordRect = new Rectangle(swordPosX , swordPosY, swordWidth, swordHeight);
 Rectangle enemyRect = new Rectangle(enemySpawnX, enemySpawnY, 64, 64);
+Rectangle bgrect = new Rectangle(0, 43, windowWidth, windowHeight);
+Texture2D bgTexture = Raylib.LoadTexture(@"bgTowerImg.png");
 
+//--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//stuff +
+//--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+bgrect.Width = bgTexture.Width;
+bgrect.Height = bgTexture.Height;
 
 
 swordRect.Width = swordTexture.Width;
@@ -108,6 +115,9 @@ while (!Raylib.WindowShouldClose())
         */
 
         //pause
+
+        Image Pimg = Raylib.LoadImageFromScreen();
+        Texture2D pauseTexture = new Raylib.LoadTextureFromImage(Pimg);
 
         Raylib.GetMousePosition();
 
@@ -218,7 +228,14 @@ while (!Raylib.WindowShouldClose())
 
     if(scene == "start"){
 
-        Raylib.ClearBackground(Color.BLUE);
+/*
+        Raylib.DrawLine( 0, 35, windowWidth, 35, Color.RED);
+        Raylib.DrawLine( 0, 765, windowWidth, 765, Color.RED);
+*/
+    //-------------------------------------------------------------------------------
+
+        Raylib.ClearBackground(Color.BLANK);
+        Raylib.DrawTexture(bgTexture, (int) bgrect.X, (int) bgrect.Y, Color.WHITE);
         Raylib.DrawText("press space to start", 100, 500, 100, Color.BLACK);
 
     }
@@ -239,15 +256,17 @@ while (!Raylib.WindowShouldClose())
     }
     else if (scene == "pause"){
 //Draw lineup
-       
+       /*
         Raylib.DrawLine( 640, 0, 640, 800, Color.RED);
         Raylib.DrawLine( 436, 0, 436, 800, Color.RED);
         Raylib.DrawLine( 844, 0, 844, 800, Color.RED);
-
+        */
 //actual
 
-        Raylib.ClearBackground(Color.BLACK);
-        Raylib.DrawText("PAUSED", 434, 0, 100, Color.BLANK);
+        
+        Raylib.ClearBackground(Color.BLANK);
+        Raylib.DrawTexture(pauseTexture, (int) swordRect.X, (int) swordRect.Y, Color.WHITE);
+        Raylib.DrawText("PAUSED", 434, 0, 100, Color.WHITE);
         Raylib.DrawText("Press space to resume!", 390, 700, 40, Color.WHITE);
 
 
