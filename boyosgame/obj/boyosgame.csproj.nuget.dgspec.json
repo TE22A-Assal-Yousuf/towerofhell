@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\yousuf.assal\\Documents\\spelutväckling\\towerofhell\\boyosgame\\boyosgame.csproj": {}
+    "c:\\Users\\yousuf.assal\\Documents\\spelutväckling\\towerofhell\\boyosgame\\boyosgame.csproj": {}
   },
   "projects": {
-    "C:\\Users\\yousuf.assal\\Documents\\spelutväckling\\towerofhell\\boyosgame\\boyosgame.csproj": {
+    "c:\\Users\\yousuf.assal\\Documents\\spelutväckling\\towerofhell\\boyosgame\\boyosgame.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\yousuf.assal\\Documents\\spelutväckling\\towerofhell\\boyosgame\\boyosgame.csproj",
+        "projectUniqueName": "c:\\Users\\yousuf.assal\\Documents\\spelutväckling\\towerofhell\\boyosgame\\boyosgame.csproj",
         "projectName": "boyosgame",
-        "projectPath": "C:\\Users\\yousuf.assal\\Documents\\spelutväckling\\towerofhell\\boyosgame\\boyosgame.csproj",
+        "projectPath": "c:\\Users\\yousuf.assal\\Documents\\spelutväckling\\towerofhell\\boyosgame\\boyosgame.csproj",
         "packagesPath": "C:\\Users\\yousuf.assal\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\yousuf.assal\\Documents\\spelutväckling\\towerofhell\\boyosgame\\obj\\",
+        "outputPath": "c:\\Users\\yousuf.assal\\Documents\\spelutväckling\\towerofhell\\boyosgame\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
