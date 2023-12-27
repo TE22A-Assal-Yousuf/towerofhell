@@ -109,7 +109,7 @@ Rectangle doorRect = new Rectangle(760, 460, 32, 32);
 
 while (!Raylib.WindowShouldClose())
 {
-
+5
     Raylib.BeginDrawing();
 
     if (scene == "start")
