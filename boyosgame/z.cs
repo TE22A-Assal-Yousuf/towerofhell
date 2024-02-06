@@ -1,4 +1,4 @@
-﻿﻿using Raylib_cs;
+﻿using Raylib_cs;
 using System.Numerics;
 using System.Runtime.InteropServices;
 
@@ -8,7 +8,6 @@ int fps = 60;
 
 Raylib.InitWindow(windowWidth, windowHeight, "Battletower");
 Raylib.SetTargetFPS(fps);
-
 //--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 // Variables
 //--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -17,10 +16,13 @@ Vector2 movement = new Vector2(0.1f, 0.1f);
 
 float speed = 5;
 
-string scene = "start";
+string scene = "clickgame";
 
-int playerPositionX = 576;
-int playerPositionY = 528;
+int spawnX = 1280 / 2;
+int spawnY = 800 / 2;
+
+int playerPositionX = 500;
+int playerPositionY = 500;
 
 int enemySpawnX = windowWidth / 2 - 128;
 int enemySpawnY = windowHeight / 2 - 128;
@@ -31,48 +33,28 @@ int swordPosY = playerPositionY - 62;
 int swordWidth = 20;
 int swordHeight = 64;
 
+int coinSpawnX = 100;
+int coinSpawnY = 100;
+int coinWorth = 20;
+
 int points = 0;
 int healthPoints = 100;
+int bossMaxHealth = 999999999;
+int bossHealth = 999999999;
+int bossDMG = 1000;
 
+string heroSword;
+int heroSwordDMG = 1;
 
-//Stats --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-/* NOTES!!!!!!!!
-
-int streangth
-- increase attach damage and raise the number probability
-- if streangth is high it = higher chance of miss but not to high
-- 
-
-int defence
-- reduce damage lol
-- slower attack speed
-- idk
-
-int attackspeed
--
--
--
-
-int evasion
-- how often you could dodge attacks / negate damage "gwen is imune =D" % wise
-- not to high but if you only build it it becomes verry funny becaus no hit possible
-- funny haha make one boss that has extra high evasion so its impossible
-- but ur def stat will be absolutely tanked so that if you do get hit you will be fucked
-
-int accuracy
-- with 100% accuracy comes great reduction to damage so you dont get some bs hits
--
-
-
-*/
+string currentSword;
+int currentSwordDMG;
 
 //--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 // Stuff
 //--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 Texture2D swordTexture = Raylib.LoadTexture(@"swordtexture.png");
-Rectangle swordRect = new Rectangle(swordPosX , swordPosY, swordWidth, swordHeight);
+Rectangle swordRect = new Rectangle(swordPosX, swordPosY, swordWidth, swordHeight);
 
 Rectangle playerRect = new Rectangle(playerPositionX, playerPositionY, 64, 64);
 Rectangle enemyRect = new Rectangle(enemySpawnX, enemySpawnY, 64, 64);
@@ -80,7 +62,15 @@ Rectangle enemyRect = new Rectangle(enemySpawnX, enemySpawnY, 64, 64);
 Rectangle bgrect = new Rectangle(0, 43, windowWidth, windowHeight);
 Texture2D bgTexture = Raylib.LoadTexture(@"bgTowerImg.png");
 
+Rectangle coinRect = new Rectangle(coinSpawnX, coinSpawnY, 32, 32);
+
 List<Rectangle> walls = new();
+List<Rectangle> enemies = new();
+
+Raylib.GetMousePosition();
+
+
+
 //--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 //stuff +
 //--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -88,20 +78,18 @@ List<Rectangle> walls = new();
 enemyRect.Width = 128;
 enemyRect.Height = 128;
 
-
 bgrect.Width = bgTexture.Width;
 bgrect.Height = bgTexture.Height;
-
 
 swordRect.Width = swordTexture.Width;
 swordRect.Height = swordTexture.Height;
 
-walls.Add(new Rectangle(32, 32, 32, 128));
-walls.Add(new Rectangle(64, 32, 128, 32));
-walls.Add(new Rectangle(192, 32, 32, 128));
-walls.Add(new Rectangle(256, 32, 32, 128));
+walls.Add(new Rectangle(0, 0, 1280, 32));
+walls.Add(new Rectangle(0, 0, 32, 800));
+walls.Add(new Rectangle(1248, 0, 32, 800));
+walls.Add(new Rectangle(0, 768, 1280, 32));
 
-Rectangle doorRect = new Rectangle(760, 460, 32, 32);
+enemies.Add(new Rectangle(200, 200, 100,20));
 
 //--------------------------------------------------------------------------------------------------------------------------------------------------------------
 //Game be like
@@ -109,114 +97,82 @@ Rectangle doorRect = new Rectangle(760, 460, 32, 32);
 
 while (!Raylib.WindowShouldClose())
 {
-5
+
     Raylib.BeginDrawing();
 
     if (scene == "start")
     {
-        
+
         if (Raylib.IsKeyPressed(KeyboardKey.KEY_SPACE))
         {
+            scene = "pregame";
+        }           
+        
+        
+    }
+    else if (scene == "pregame"){
 
-            playerPositionX = 576;
-            playerPositionY = 528;
-            healthPoints = 100;
-
+        if (Raylib.IsKeyPressed(KeyboardKey.KEY_SPACE))
+        {
             scene = "game";
         }
     }
     else if (scene == "game")
     {
+        
+        
         Raylib.DrawRectangleRec(enemyRect, Color.SKYBLUE);
         Raylib.DrawRectangleRec(playerRect, Color.RED);
 
-        //Raylib.DrawTextureEx(swordtexture, , 45, 1, Color.BLUE);
-        /*
-        [Better map layout and stuff]
-
-        make the map a grid that everything is placed on 
-        ↓
-
-        */
-
-        //pause
-
-        Image Pimg = Raylib.LoadImageFromScreen();
-        Raylib.GetMousePosition();
 
          if (Raylib.IsKeyPressed(KeyboardKey.KEY_SPACE))
         {
             scene = "pause";
         }
 
-        //button
-        /*
+        currentSword = "heroSword";
+        currentSwordDMG = heroSwordDMG;
 
-        - check where mouse is
-        - if mouse is over the buttons pos
-        - then if mouse is clicked over this pos 
-        - the button exe whatever ist supposed to 
-        
-        */
-
-        //fighting
-
-        
-
-        /*
-
-        - write simillar code to the fighting game
-        - add some cool shit / more options 
-        - idk but add more
-        
-        */
-
-        //enemy
-
-        /*
-
-        - make if toutch 
-        - popup window when i collide with enemy
-        - ask if i want to fight
-        - sometimes ask but force me no matter what 
-        
-        */
-
-        //collision
-
-        /*
-
-        - check if i have collided 
-        - if true execute whatever i need
-        
-        */
-
-        bool isInAWall = CheckIfWall(playerRect, walls);
+        bool isInAWall = CheckIfWall(swordRect, playerRect, walls);
 
         if (isInAWall == true)
         {
             playerRect.X -= movement.X;
         }
-    
-        isInAWall = CheckIfWall(playerRect, walls);
+
+        if (isInAWall == true)
+        {
+            swordRect.X -= movement.X;
+        }
+
+        isInAWall = CheckIfWall(swordRect, playerRect, walls);
 
         if (isInAWall == true)
         {
             playerRect.Y -= movement.Y;
         }
 
-        if (Raylib.CheckCollisionRecs(playerRect, doorRect))
+        if (isInAWall == true)
         {
-            points++;
+            swordRect.Y -= movement.Y;
         }
 
         if (Raylib.CheckCollisionRecs(playerRect, enemyRect))
         {
-            healthPoints--; 
+            healthPoints -= bossDMG; 
+        }
+        if (Raylib.CheckCollisionRecs(swordRect, enemyRect))
+        {
+            bossHealth -= currentSwordDMG;  
         }
 
         if(healthPoints <= 0){
             scene = "death";
+        }
+
+        if(bossHealth <= bossMaxHealth - 1){
+            enemySpawnY -= 10;
+            healthPoints = 0;
         }
 
         //walk
@@ -260,7 +216,6 @@ while (!Raylib.WindowShouldClose())
         playerRect.Y += movement.Y;
         swordRect.X += movement.X;
         swordRect.Y += movement.Y;
-
         
 
     }
@@ -271,20 +226,90 @@ while (!Raylib.WindowShouldClose())
 
         }
     }
-    else if (scene == "death"){
-
-        
-
+    else if (scene == "pause2"){
         if(Raylib.IsKeyPressed(KeyboardKey.KEY_SPACE)){
 
-            scene = "start";
+            scene = "clickgame";
 
         }
     }
+    else if (scene == "death"){
+
+        if (Raylib.IsKeyPressed(KeyboardKey.KEY_SPACE)){
+
+            scene = "cutscene";
+
+        }
+        
+    }
+    else if (scene == "cutscene"){
+
+        if(Raylib.IsKeyPressed(KeyboardKey.KEY_SPACE)){
+
+            scene = "clickgame";
+
+        }
+    }
+
+    else if (scene == "clickgame"){
+        
+        
+        Vector2 mpousePos = Raylib.GetMousePosition();
+        swordRect.X = mpousePos.X - 10;
+        swordRect.Y = mpousePos.Y - 50;
+
+        if(Raylib.CheckCollisionPointRec(mpousePos, coinRect)){
+
+            points += coinWorth;
+
+
+        }
+
+
+       // if(coinRect.Y >= mpousePos.Y && coinRect.X <= mpousePos.X && coinRect.Width <= mpousePos.X && coinRect.Height <= mpousePos.Y && Raylib.IsMouseButtonPressed(MouseButton.MOUSE_BUTTON_LEFT)){
+            
+       points += coinWorth;
+
+        //}
     
+
+        
+
+        Raylib.DrawRectangleRec(coinRect, Color.GOLD);
+
+
+        Raylib.DrawRectangle(0, 768, 1280, 32, Color.DARKBROWN);
+        Raylib.DrawRectangle(0, 0, 1280, 32, Color.DARKBROWN);
+        Raylib.DrawRectangle(0, 0, 32, 800, Color.DARKBROWN);
+        Raylib.DrawRectangle(1000, 0, 500, 800, Color.DARKBROWN);
+
+        if (Raylib.IsKeyPressed(KeyboardKey.KEY_SPACE))
+        {
+            scene = "pause2";
+        }
+
+    }
+
+    static bool CheckIfWall(Rectangle swordRect, Rectangle playerRect, List<Rectangle> walls)
+{
+  foreach (Rectangle wall in walls)
+  {
+    if (Raylib.CheckCollisionRecs(playerRect, wall))
+    {
+      return true;
+    }
+    if (Raylib.CheckCollisionRecs(swordRect, wall))
+    {
+      return true;
+    }
+
+  }
+  return false;
+}
     //--------------------------------------------------------------------------------------------------------------------------------------------------------------
     //OMG THAT LOOKS NICE
     //--------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 
     if(scene == "start"){
 
@@ -294,9 +319,22 @@ while (!Raylib.WindowShouldClose())
 */
     //-------------------------------------------------------------------------------
 
-        Raylib.ClearBackground(Color.BLANK);
-        Raylib.DrawTexture(bgTexture, (int) bgrect.X, (int) bgrect.Y, Color.WHITE);
+        Raylib.ClearBackground(Color.GRAY);
+        //Raylib.DrawTexture(bgTexture, (int) bgrect.X, (int) bgrect.Y, Color.WHITE);
         Raylib.DrawText("press space to start", 100, 500, 100, Color.BLACK);
+
+    }
+    else if(scene == "pregame"){
+
+        Raylib.DrawText("STORY:", 570, 50, 30, Color.WHITE);
+        Raylib.DrawText("Hello traveler", 480, 100, 40, Color.WHITE);
+        Raylib.DrawText("You have died and been reincarnated", 230, 180, 40, Color.WHITE);
+        Raylib.DrawText("and transported to a different world", 230, 260, 40, Color.WHITE);
+        Raylib.DrawText("Your mission is to defeat the demon lord", 214, 340, 40, Color.WHITE);
+        Raylib.DrawText("Good luck!", 520, 420, 40, Color.WHITE);
+        Raylib.DrawText("-press space to continue", 150, 560, 70, Color.WHITE);
+
+        Raylib.ClearBackground(Color.BLACK);
 
     }
     else if(scene == "game"){
@@ -307,30 +345,28 @@ while (!Raylib.WindowShouldClose())
         
      
 
-        Raylib.DrawText("-Press space to pause!", 1025, 760, 20, Color.WHITE);
+        Raylib.DrawText("-Press space to pause!", 1025, 750, 20, Color.WHITE);
 
-        Raylib.DrawRectangleRec(doorRect, Color.BROWN);
 
     foreach (Rectangle wall in walls)
     {
       Raylib.DrawRectangleRec(wall, Color.BLACK);
     }
 
-    Raylib.DrawText($"Points: {points}", 10, 42, 32, Color.WHITE);
     Raylib.DrawText($"HP: {healthPoints}", 10, 10, 32, Color.WHITE);
-        
-
-        
-        
-
+    Raylib.DrawText($"BOSS HEALTH: {bossHealth}", enemySpawnX - 120, enemySpawnY - 80, 32, Color.WHITE);
+    
     }
     else if(scene == "death"){
 
         Raylib.ClearBackground(Color.BLACK);
-        Raylib.DrawText("PAUSED", 434, 0, 100, Color.WHITE);
-        Raylib.DrawText("Press space to resume!", 390, 700, 40, Color.WHITE);
+        Raylib.DrawText("Wait what you died??", 370, 50, 50, Color.WHITE);
+        Raylib.DrawText("How could this happen", 350, 120, 50, Color.WHITE);
+        Raylib.DrawText("You even had the hero's sword", 250, 190, 50, Color.WHITE);
+        Raylib.DrawText("Okay i guess you still need some training", 150, 260, 50, Color.WHITE);
+        Raylib.DrawText("Even though you are the chosen one...", 180, 330, 50, Color.WHITE);
+        Raylib.DrawText("-Press space to continue!", 390, 500, 40, Color.WHITE);
 
-  
     }
 
     else if (scene == "pause"){
@@ -342,43 +378,41 @@ while (!Raylib.WindowShouldClose())
         */
 //actual
 
-        
         Raylib.DrawText("PAUSED", 434, 0, 100, Color.WHITE);
         Raylib.DrawText("Press space to resume!", 390, 700, 40, Color.WHITE);
 
+    }
+    else if (scene == "pause2"){
+        //Draw lineup
+       /*
+        Raylib.DrawLine( 640, 0, 640, 800, Color.RED);
+        Raylib.DrawLine( 436, 0, 436, 800, Color.RED);
+        Raylib.DrawLine( 844, 0, 844, 800, Color.RED);
+        */
+        //actual
+
+        Raylib.DrawText("PAUSED", 434, 0, 100, Color.WHITE);
+        Raylib.DrawText("Press space to resume!", 390, 700, 40, Color.WHITE);
+
+    }
+    else if (scene == "cutscene"){
+        Raylib.DrawText("You are sent to the slime fields...", 180, 330, 50, Color.BLACK); 
+        Raylib.DrawText("-Press space to continue!", 390, 500, 40, Color.BLACK);
+        Raylib.ClearBackground(Color.GRAY);
+        
+    }
+    else if (scene == "clickgame"){
+        Raylib.DrawText($"Points: {points}", 1080, 30, 32, Color.WHITE);
+
+        Raylib.ClearBackground(Color.GREEN);
+
+
+        Raylib.DrawTexture(swordTexture, (int) swordRect.X, (int) swordRect.Y, Color.WHITE);
 
 
     }
-
-
-    /*
-    [SWORD ANIMATION AND HITBOX]
-
-    if mouse button gets clicked 
-    ↓
-    make the hitbox of the sword bigger / as big as the sword animation/look
-    ↓
-    play an animation that shows the sword swinging relly fast but in reality the hit box is just expaning 
-
-
-
-    */
-   
-
-
-
 
     Raylib.EndDrawing();
 
-    static bool CheckIfWall(Rectangle playerRect, List<Rectangle> walls)
-{
-  foreach (Rectangle wall in walls)
-  {
-    if (Raylib.CheckCollisionRecs(playerRect, wall))
-    {
-      return true;
-    }
-  }
-  return false;
-}
+    
 }
